@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sunburst CSV sin conflictos</title>
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+  <style>
+    body { font-family: Arial; margin: 40px; background: #f4f4f4; }
+    #grafico { width: 100%; max-width: 1000px; height: 700px; margin: auto; }
+    textarea { display: none; }
+  </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">Gráfico Sunburst desde CSV (IDs únicos)</h2>
+
+<textarea id="csvData">
+PERSONA;Tipo Busqueda Selectiva;TIPO;MONTO
+VIVIANA RIVERA ANGULO;BIENES INMUEBLES;APARTAMENTO 50S-2051199;484438500
+VIVIANA RIVERA ANGULO;BIENES INMUEBLES;APARTAMENTO 50N-123456;494325000
+VIVIANA RIVERA ANGULO;BIENES INMUEBLES;APARTAMENTO 50N-9876543;507507000
+VIVIANA RIVERA ANGULO;VEHICULOS;BHU-123;80479000
+VIVIANA RIVERA ANGULO;VEHICULOS;ZDR-987;65424000
+VIVIANA RIVERA ANGULO;VEHICULOS;TFX-765;33959000
+VIVIANA RIVERA ANGULO;VEHICULOS;WQA-718;102698000
+VIVIANA RIVERA ANGULO;SEMOVIENTES;BOVINOS;124200000
+VIVIANA RIVERA ANGULO;ESTABLECIMIENTOS;ELECTRORIVER LTDA;12000901000
+VIVIANA RIVERA ANGULO;ESTABLECIMIENTOS;AGENCIA MODELS LTDA;22815901000
+VIVIANA RIVERA ANGULO;ESTABLECIMIENTOS;LA REINA;5615901000
+
+</textarea>
+
+<div id="grafico"></div>
+
+<script>
+function parseCSV(text) {
+  const rows = text.trim().split("\n");
+  const headers = rows.shift().split(";"); // ✅ CAMBIO A ;
+  return rows.map(row => {
+    const values = row.split(";"); // ✅ CAMBIO A ;
+    return Object.fromEntries(headers.map((h, i) => [h, values[i]]));
+  });
+}
+
+try {
+  const data = parseCSV(document.getElementById("csvData").value);
+  const ids = [], labels = [], parents = [], values = [], added = new Set();
+  let idCounter = 0;
+
+  function safeAdd(id, label, parent, value = 0) {
+    if (!added.has(id)) {
+      ids.push(id);
+      labels.push(label);
+      parents.push(parent);
+      values.push(value);
+      added.add(id);
+    }
+  }
+
+const customText = [];
+
+data.forEach(row => {
+  const persona = row["PERSONA"];
+  const tipoBusqueda = row["Tipo Busqueda Selectiva"];
+  const tipo = row["TIPO"];
+  const monto = parseFloat(String(row["MONTO"]).replace(/[$,\s]/g, ''));
+
+  if (!persona || !tipoBusqueda || !tipo || isNaN(monto)) return;
+
+  const idPersona = persona;
+  const idBusqueda = persona + "|" + tipoBusqueda;
+  const idTipo = persona + "|" + tipoBusqueda + "|" + tipo + "|" + (++idCounter);
+
+  safeAdd(idPersona, persona, "");
+  safeAdd(idBusqueda, tipoBusqueda, idPersona);
+  safeAdd(idTipo, tipo, idBusqueda, monto);
+});
+
+// Generar texto formateado
+for (let i = 0; i < values.length; i++) {
+  const val = values[i];
+  customText.push(
+    val > 0 ? labels[i] + "<br><b>$" + val.toLocaleString('es-CO') + "</b>" : labels[i]
+  );
+}
+
+Plotly.newPlot("grafico", [{
+  type: "sunburst",
+  ids: ids,
+  labels: labels,
+  parents: parents,
+  values: values,
+  branchvalues: "remainder",
+  hoverinfo: "text",
+  text: customText,
+  textinfo: "text"  // 👈 Mostrará customText con formato
+}]);
+
+} catch (error) {
+  console.error("❌ Error general:", error);
+}
+</script>
+
+</body>
+</html>

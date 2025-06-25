@@ -25,11 +25,78 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+      <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+
+      <style>
+    body { font-family: Arial; margin: 40px; background: #f4f4f4; }
+    #grafico { width: 100%; max-width: 1000px; height: 700px; margin: auto; }
+    textarea { display: none; }
+  </style>
     <style>
         table td:first-child {
             text-align: left;
         }
     </style>
+    
+    <style>
+  .resumen-bienes {
+    display: flex;
+    align-items: flex-start;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  .resumen-bienes img {
+    width: 64px;
+    height: 64px;
+    margin-right: 15px;
+  }
+  .tabla-bienes {
+    border-collapse: collapse;
+    font-size: 14px;
+    width: auto;
+  }
+  .tabla-bienes td {
+    padding: 6px 12px;
+    vertical-align: middle;
+  }
+  .tabla-bienes .categoria {
+    font-weight: bold;
+    color: #000;
+  }
+  .tabla-bienes .cantidad {
+    font-weight: bold;
+    text-align: right;
+    padding-right: 20px;
+  }
+  .tabla-bienes .total {
+    color: #888;
+    font-size: 13px;
+    text-align: right;
+    padding-left: 20px;
+    white-space: nowrap;
+  }
+</style>
+
+                    <style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    table-layout: fixed;
+  }
+  th, td {
+    border: 1px solid #444;
+    padding: 8px;
+    text-align: center;
+    vertical-align: top;
+  }
+  th {
+    background-color: #dbe5f1;
+    font-weight: bold;
+  }
+</style>
+
 
 </head>
 
@@ -1161,6 +1228,30 @@
                                         <div class="card-body">
                                           <h6 class="font-weight-bold text-dark">🔎 Detalles del delito</h6>
                                           
+                                          
+<h2 style="text-align:center;">Gráfico Sunburst desde CSV (IDs únicos)</h2>
+
+<textarea id="csvData">
+PERSONA;Tipo Busqueda Selectiva;TIPO;MONTO
+VIVIANA RIVERA ANGULO;BIENES INMUEBLES;APARTAMENTO 50S-2051199;484438500
+VIVIANA RIVERA ANGULO;BIENES INMUEBLES;APARTAMENTO 50N-123456;494325000
+VIVIANA RIVERA ANGULO;BIENES INMUEBLES;APARTAMENTO 50N-9876543;507507000
+VIVIANA RIVERA ANGULO;VEHICULOS;BHU-123;80479000
+VIVIANA RIVERA ANGULO;VEHICULOS;ZDR-987;65424000
+VIVIANA RIVERA ANGULO;VEHICULOS;TFX-765;33959000
+VIVIANA RIVERA ANGULO;VEHICULOS;WQA-718;102698000
+VIVIANA RIVERA ANGULO;SEMOVIENTES;BOVINOS;124200000
+VIVIANA RIVERA ANGULO;ESTABLECIMIENTOS;ELECTRORIVER LTDA;12000901000
+VIVIANA RIVERA ANGULO;ESTABLECIMIENTOS;AGENCIA MODELS LTDA;22815901000
+VIVIANA RIVERA ANGULO;ESTABLECIMIENTOS;LA REINA;5615901000
+
+</textarea>
+
+<div id="grafico"></div>
+
+
+
+
                                         </div>
                                       </div>
                                       
@@ -1177,10 +1268,75 @@
                             
                                <div class="card shadow mb-4">
                                     <div class="card-header py-3">
-                                      <h5 class="m-0 font-weight-bold text-primary">📌 Informe de Captura en Flagrancia</h5>
+                                      <h5 class="m-0 font-weight-bold text-primary">📌 Bienes Suceptibles de Extincion del Dominio</h5>
                                     </div>
                                     <div class="card-body">
-                               <p>aca resumen</p>
+                           
+
+                               
+<table>
+  <tr>
+    <th colspan="6">INFORMACIÓN DE BIENES</th>
+  </tr>
+  <tr>
+    <th>OBJETIVO</th>
+    <th>BIENES INMUEBLES</th>
+    <th>LUGAR</th>
+    <th>ESTABLECIMIENTOS</th>
+    <th>SEMOVIENTES</th>
+    <th>VEHÍCULOS</th>
+  </tr>
+  <tr>
+    <td rowspan="3">VIVIANA RIVERA ANGULO</td>
+    <td>APARTAMENTO 50S-2051199</td>
+    <td rowspan="3">BOGOTÁ</td>
+    <td>ELECTRORIVER LTDA</td>
+    <td rowspan="3">BOVINOS APROX. 69 CABEZAS</td>
+    <td>BHU-123</td>
+  </tr>
+  <tr>
+    <td>APARTAMENTO 50N-123456</td>
+    <td>AGENCIA MODELS LTDA</td>
+    <td>ZDR-987</td>
+  </tr>
+  <tr>
+    <td>APARTAMENTO 50N-9876543</td>
+    <td>LA REINA</td>
+    <td>TFX-765<br>WQA-718</td>
+  </tr>
+</table>
+
+<div class="resumen-bienes">
+
+
+  <table class="tabla-bienes">
+    <tr>
+      <td class="categoria">BIENES INMUEBLES</td>
+      <td class="cantidad">3</td>
+      <td class="total" rowspan="4"><strong>VALOR TOTAL $ 42.786<br>MILLONES DE PESOS</strong></td>
+    </tr>
+    <tr>
+      <td class="categoria">BIENES MUEBLES</td>
+      <td class="cantidad">4</td>
+    </tr>
+    <tr>
+      <td class="categoria">SEMOVIENTES</td>
+      <td class="cantidad">69</td>
+    </tr>
+    <tr>
+      <td class="categoria">ESTABLECIMIENTOS COMERCIALES</td>
+      <td class="cantidad">3</td>
+    </tr>
+  </table>
+</div>
+</div>
+
+
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
                                     </div>
                                   </div>
                                   
@@ -1299,6 +1455,75 @@
     }
     </script>
     
+    <script>
+function parseCSV(text) {
+  const rows = text.trim().split("\n");
+  const headers = rows.shift().split(";"); // ✅ CAMBIO A ;
+  return rows.map(row => {
+    const values = row.split(";"); // ✅ CAMBIO A ;
+    return Object.fromEntries(headers.map((h, i) => [h, values[i]]));
+  });
+}
+
+try {
+  const data = parseCSV(document.getElementById("csvData").value);
+  const ids = [], labels = [], parents = [], values = [], added = new Set();
+  let idCounter = 0;
+
+  function safeAdd(id, label, parent, value = 0) {
+    if (!added.has(id)) {
+      ids.push(id);
+      labels.push(label);
+      parents.push(parent);
+      values.push(value);
+      added.add(id);
+    }
+  }
+
+const customText = [];
+
+data.forEach(row => {
+  const persona = row["PERSONA"];
+  const tipoBusqueda = row["Tipo Busqueda Selectiva"];
+  const tipo = row["TIPO"];
+  const monto = parseFloat(String(row["MONTO"]).replace(/[$,\s]/g, ''));
+
+  if (!persona || !tipoBusqueda || !tipo || isNaN(monto)) return;
+
+  const idPersona = persona;
+  const idBusqueda = persona + "|" + tipoBusqueda;
+  const idTipo = persona + "|" + tipoBusqueda + "|" + tipo + "|" + (++idCounter);
+
+  safeAdd(idPersona, persona, "");
+  safeAdd(idBusqueda, tipoBusqueda, idPersona);
+  safeAdd(idTipo, tipo, idBusqueda, monto);
+});
+
+// Generar texto formateado
+for (let i = 0; i < values.length; i++) {
+  const val = values[i];
+  customText.push(
+    val > 0 ? labels[i] + "<br><b>$" + val.toLocaleString('es-CO') + "</b>" : labels[i]
+  );
+}
+
+Plotly.newPlot("grafico", [{
+  type: "sunburst",
+  ids: ids,
+  labels: labels,
+  parents: parents,
+  values: values,
+  branchvalues: "remainder",
+  hoverinfo: "text",
+  text: customText,
+  textinfo: "text"  // 👈 Mostrará customText con formato
+}]);
+
+} catch (error) {
+  console.error("❌ Error general:", error);
+}
+</script>
+
     
 </body>
 

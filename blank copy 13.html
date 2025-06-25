@@ -21,34 +21,65 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
     <style>
+  .resumen-bienes {
+    display: flex;
+    align-items: flex-start;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  .resumen-bienes img {
+    width: 64px;
+    height: 64px;
+    margin-right: 15px;
+  }
+  .tabla-bienes {
+    border-collapse: collapse;
+    font-size: 14px;
+    width: auto;
+  }
+  .tabla-bienes td {
+    padding: 6px 12px;
+    vertical-align: middle;
+  }
+  .tabla-bienes .categoria {
+    font-weight: bold;
+    color: #000;
+  }
+  .tabla-bienes .cantidad {
+    font-weight: bold;
+    text-align: right;
+    padding-right: 20px;
+  }
+  .tabla-bienes .total {
+    color: #888;
+    font-size: 13px;
+    text-align: right;
+    padding-left: 20px;
+    white-space: nowrap;
+  }
+</style>
+
+                    <style>
   table {
     border-collapse: collapse;
     width: 100%;
     font-family: Arial, sans-serif;
     font-size: 14px;
+    table-layout: fixed;
   }
-  td, th {
+  th, td {
     border: 1px solid #444;
-    padding: 6px;
+    padding: 8px;
+    text-align: center;
     vertical-align: top;
   }
   th {
-    background-color: #f0f0f0;
-    text-align: left;
-  }
-  .titulo {
-    text-align: center;
-    background-color: #d1e7dd;
-    font-weight: bold;
-    font-size: 16px;
-  }
-  .subtitulo {
-    background-color: #f8f9fa;
+    background-color: #dbe5f1;
     font-weight: bold;
   }
 </style>
-</head>
 
+</head>
 
 <body id="page-top">
 
@@ -70,10 +101,10 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Verónica Lisandra Álzate</span></a>
+                    <span>Dashboard</span></a>
             </li>
 
             <!-- Divider -->
@@ -84,56 +115,38 @@
                 Interface
             </div>
 
-                     <!-- Nav Item - Pages Collapse Menu -->
-                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                            aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>Nucleo Cercano</span>
-                        </a>
-        
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Personas Relacionadas</h6>
-                                <a class="collapse-item" href="Viviana.html">Viviana Rivera Angulo </a>
-                           
-                            </div>
-                        </div>
-                        
-                    </li>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Components</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
+                    </div>
+                </div>
+            </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Analisis patrimonial</span>
+                    <span>Utilities</span>
                 </a>
-                <div id="collapseUtilities" class="collapse show" aria-labelledby="headingUtilities"
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">estudio de titulos:</h6>
-                        <a class="collapse-item" href="blank copy.html">50S-2051199</a>
-                        <a class="collapse-item" href="blank copy 2.html">50N-123456</a>
-                        <a class="collapse-item" href="blank copy 3.html">50N-9876543</a>
-                        <a class="collapse-item" href="blank copy 8.html">50C-19045276</a>
-                        <a class="collapse-item" href="blank copy 7 - copia.html">AVALUOS DE INMUEBLES</a>
-
-                      
-                        <h6 class="collapse-header">estudio de vehiculos:</h6>
-                        <a class="collapse-item" href="blank copy 4.html">BHU - 123</a>
-                        <a class="collapse-item" href="blank copy 5.html">ZDR - 987</a>
-                        <a class="collapse-item" href="blank copy 6.html">TFX -765</a>
-                        <a class="collapse-item" href="blank copy 7.html">WQA - 718</a>
-
-                        <h6 class="collapse-header">Avaluo semovientes:</h6>
-                        <a class="collapse-item" href="blank copy 9.html">Semovientes</a>
-
-                        <h6 class="collapse-header">Establecimientos:</h6>
-                        <a class="collapse-item" href="blank copy 10.html">Almacen</a>
-                        <a class="collapse-item" href="blank copy 11.html">Model</a>
-                        <a class="collapse-item" href="blank copy 12.html">la Reina</a>
-
+                        <h6 class="collapse-header">Custom Utilities:</h6>
+                        <a class="collapse-item" href="utilities-color.html">Colors</a>
+                        <a class="collapse-item" href="utilities-border.html">Borders</a>
+                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                    </div>
                 </div>
             </li>
 
@@ -141,7 +154,49 @@
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-        
+            <div class="sidebar-heading">
+                Addons
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+                    aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Pages</span>
+                </a>
+                <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.html">Login</a>
+                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Other Pages:</h6>
+                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item active" href="blank.html">Blank Page</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -366,83 +421,62 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
 
-
-                    <div class="container my-4">
-                        <table>
-  <tr><th colspan="4" class="titulo">🚌 INFORME TÉCNICO - VEHÍCULO TRANSPORTE PÚBLICO</th></tr>
-
-  <tr><th colspan="4" class="subtitulo">📌 Información general del vehículo</th></tr>
+<table>
   <tr>
-    <td><strong>Placa:</strong> BHU-123</td>
-    <td><strong>Propietaria:</strong> Viviana Rivera Alzate</td>
-    <td><strong>Estado registral:</strong> Activo</td>
-    <td><strong>Fecha de matrícula:</strong> 17 de enero de 2010</td>
+    <th colspan="6">INFORMACIÓN DE BIENES</th>
   </tr>
   <tr>
-    <td colspan="4"><strong>Organismo de tránsito:</strong> Instituto Departamental de Tránsito y Transporte de Funza, Cundinamarca</td>
-  </tr>
-
-  <tr><th colspan="4" class="subtitulo">🔧 Características técnicas</th></tr>
-  <tr>
-    <td><strong>Clase:</strong> Autobús</td>
-    <td><strong>Marca:</strong> Chevrolet</td>
-    <td><strong>Línea:</strong> NQR JB Evolution</td>
-    <td><strong>Modelo:</strong> 2010</td>
+    <th>OBJETIVO</th>
+    <th>BIENES INMUEBLES</th>
+    <th>LUGAR</th>
+    <th>ESTABLECIMIENTOS</th>
+    <th>SEMOVIENTES</th>
+    <th>VEHÍCULOS</th>
   </tr>
   <tr>
-    <td><strong>Cilindraje:</strong> 5.249 cc</td>
-    <td><strong>Color:</strong> Azul y rojo</td>
-    <td><strong>Carrocería:</strong> No especificada</td>
-    <td><strong>Servicio:</strong> Público</td>
+    <td rowspan="3">VIVIANA RIVERA ANGULO</td>
+    <td>APARTAMENTO 50S-2051199</td>
+    <td rowspan="3">BOGOTÁ</td>
+    <td>ELECTRORIVER LTDA</td>
+    <td rowspan="3">BOVINOS APROX. 69 CABEZAS</td>
+    <td>BHU-123</td>
   </tr>
   <tr>
-    <td><strong>Pasajeros:</strong> 25</td>
-    <td><strong>Carga:</strong> 28.176 kg</td>
-    <td><strong>Peso bruto:</strong> No especificado</td>
-    <td><strong>VIN / Motor:</strong> 627GLKIO9821</td>
+    <td>APARTAMENTO 50N-123456</td>
+    <td>AGENCIA MODELS LTDA</td>
+    <td>ZDR-987</td>
   </tr>
   <tr>
-    <td colspan="4"><strong>Número de chasis:</strong> PLMNKO09876OKNB</td>
-  </tr>
-
-  <tr><th colspan="4" class="subtitulo">📄 Documentación y certificaciones</th></tr>
-  <tr>
-    <td><strong>SOAT:</strong> Vigente</td>
-    <td><strong>Revisión técnico-mecánica:</strong> Vigente</td>
-    <td><strong>Gravámenes:</strong> No posee</td>
-    <td><strong>Autodeclaración:</strong> Sí (aprobada)</td>
-  </tr>
-  <tr>
-    <td colspan="4"><strong>Certificación académica:</strong> Sí</td>
-  </tr>
-
-  <tr><th colspan="4" class="subtitulo">💲 Avalúo fiscal - Vigencia 2025</th></tr>
-  <tr>
-    <td><strong>Tipo de vehículo:</strong> Pasajeros</td>
-    <td><strong>Clase:</strong> Bus</td>
-    <td><strong>Marca:</strong> Chevrolet</td>
-    <td><strong>Línea:</strong> NQR 700P 4X2 MT</td>
-  </tr>
-  <tr>
-    <td><strong>Cilindraje:</strong> 5.193 cc</td>
-    <td><strong>Modelo:</strong> 2010</td>
-    <td><strong>Pasajeros:</strong> 31</td>
-    <td><strong>Base gravable:</strong> $80.479.000</td>
-  </tr>
-
-  <tr><th colspan="4" class="subtitulo">📌 Observaciones</th></tr>
-  <tr>
-    <td colspan="4">
-      El vehículo se encuentra plenamente identificado en el RUNT con titularidad registrada a nombre de Viviana Rivera Alzate. <br>
-      Los datos técnicos coinciden entre el certificado RUNT y la ficha de avalúo fiscal del Ministerio de Transporte. <br>
-      No se identifican restricciones para la disposición del vehículo. <br>
-      Certificaciones y documentos están vigentes y al día.
-    </td>
+    <td>APARTAMENTO 50N-9876543</td>
+    <td>LA REINA</td>
+    <td>TFX-765<br>WQA-718</td>
   </tr>
 </table>
 
-                    </div>
-                    
+<div class="resumen-bienes">
+  <img src="https://cdn-icons-png.flaticon.com/512/744/744922.png" alt="Icono bienes">
+
+  <table class="tabla-bienes">
+    <tr>
+      <td class="categoria">BIENES INMUEBLES</td>
+      <td class="cantidad">3</td>
+      <td class="total" rowspan="4"><strong>VALOR TOTAL $ 42.786<br>MILLONES DE PESOS</strong></td>
+    </tr>
+    <tr>
+      <td class="categoria">BIENES MUEBLES</td>
+      <td class="cantidad">4</td>
+    </tr>
+    <tr>
+      <td class="categoria">SEMOVIENTES</td>
+      <td class="cantidad">69</td>
+    </tr>
+    <tr>
+      <td class="categoria">ESTABLECIMIENTOS COMERCIALES</td>
+      <td class="cantidad">3</td>
+    </tr>
+  </table>
+</div>
+
 
                 </div>
                 <!-- /.container-fluid -->
