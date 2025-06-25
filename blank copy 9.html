@@ -69,7 +69,7 @@
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Personas Relacionadas</h6>
                                 <a class="collapse-item" href="Viviana.html">Viviana Rivera Angulo </a>
-                               
+                                <a class="collapse-item" href="#">Cards</a>
                             </div>
                         </div>
                         
@@ -101,13 +101,14 @@
 
                         <h6 class="collapse-header">Avaluo semovientes:</h6>
                         <a class="collapse-item" href="blank copy 9.html">Semovientes</a>
-                </div>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
+           <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -335,65 +336,32 @@
 
 
                     <div class="container my-4">
-                        <h2 class="text-center">🚌 Informe Técnico Vehículo - Bus 3</h2>
-<hr>
+         <div class="avaluo" id="semovientes">
+    <h3>Inventario Ganadero - Finca Pedregal</h3>
+    <p><strong>Ubicación:</strong> Vereda Nuevo Paraíso, Cambao, Cundinamarca</p>
+    <p><strong>Ganadero:</strong> Viviana Rivera Angulo - C.C. 9827309182</p>
+    <p><strong>Fecha de vacunación:</strong> 13/02/2018</p>
 
-<h5>📌 Información General del Vehículo</h5>
-<ul>
-    <li><strong>Placa:</strong> TFX-765</li>
-    <li><strong>Propietario:</strong> Viviana Rivera Alzate</li>
-    <li><strong>Estado del Vehículo:</strong> Activo</li>
-    <li><strong>Fecha de Matrícula:</strong> 19 de noviembre de 2012</li>
-    <li><strong>Organismo de Tránsito:</strong> Instituto Departamental TTyT de Madrid, Cundinamarca</li>
-</ul>
+    <label for="valorUnitario">Valor unitario promedio estimado por bovino ($):</label>
+    <input type="number" id="valorUnitario" value="1800000">
+    <button onclick="calcularAvaluoSemovientes()">Calcular Avalúo</button>
 
-<h5>🚍 Especificaciones Técnicas</h5>
-<ul>
-    <li><strong>Clase:</strong> Autobús (Buseta)</li>
-    <li><strong>Marca:</strong> DAIHATSU</li>
-    <li><strong>Línea:</strong> SUPER DELTA / DELTA V128LD JUT</li>
-    <li><strong>Modelo:</strong> 2012</li>
-    <li><strong>Carrocería:</strong> No especificada</li>
-    <li><strong>Servicio:</strong> Público</li>
-    <li><strong>Color:</strong> Blanco</li>
-    <li><strong>Cilindraje:</strong> 3.249 cm³ (RUNT) / 3.660 cm³ (Base Gravable)</li>
-    <li><strong>Pasajeros:</strong> 20 (RUNT) / 19 (Base Gravable)</li>
-    <li><strong>Capacidad de carga:</strong> 15.234 kg</li>
-    <li><strong>Peso bruto vehicular:</strong> No especificado</li>
-</ul>
+    <div class="resultado" id="resultadoSemovientes"></div>
+    <div class="detalles" id="detallesSemovientes"></div>
+    <div class="explicacion">* El valor unitario se estimó según precios promedios de mercado para bovinos vacunados de características similares por grupo etario.</div>
 
-<h5>🔍 Identificación Mecánica</h5>
-<ul>
-    <li><strong>Nro. Serie / Motor:</strong> LKJH3456DFGYT</li>
-    <li><strong>VIN / Chasis:</strong> 654738KJUHSYE52631</li>
-</ul>
+    <table class="tabla-comparacion">
+        <thead><tr><th>Categoría</th><th>Descripción</th><th>Cantidad</th><th>Valor Estimado</th></tr></thead>
+        <tbody id="tablaSemovientes">
+            <!-- Se llena dinámicamente -->
+        </tbody>
+        <tfoot>
+            <tr><th colspan="3">Total Avalúo</th><th id="totalSemovientes">$0</th></tr>
+        </tfoot>
+    </table>
+</div>
 
-<h5>📄 Estado Legal y Técnico</h5>
-<ul>
-    <li><strong>SOAT:</strong> Vigente</li>
-    <li><strong>Revisión técnico-mecánica:</strong> Sí</li>
-    <li><strong>Gravámenes a la propiedad:</strong> No posee</li>
-    <li><strong>Autodeclaración:</strong> Aprobada</li>
-    <li><strong>Certificación académica:</strong> Sí</li>
-</ul>
-
-<h5>💰 Avalúo Fiscal 2025</h5>
-<ul>
-    <li><strong>Tipo de Vehículo:</strong> Pasajeros</li>
-    <li><strong>Clase:</strong> Buseta</li>
-    <li><strong>Marca:</strong> DAIHATSU</li>
-    <li><strong>Línea:</strong> DELTA V128LD JUT</li>
-    <li><strong>Modelo:</strong> 2012</li>
-    <li><strong>Base Gravable:</strong> $33.959.000</li>
-</ul>
-
-<h5>📝 Observaciones</h5>
-<p>
-    Se detecta una pequeña inconsistencia en el cilindraje (3.249 cm³ según el RUNT vs. 3.660 cm³ en el avalúo). 
-    El vehículo se encuentra activo, con documentación vigente, sin restricciones de dominio y cuenta con certificado académico.
-</p>
-
-                    </div>
+           </div>
                     
 
                 </div>
@@ -452,6 +420,38 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script>
+    function calcularAvaluoSemovientes() {
+        const categorias = [
+            { nombre: "Hembras a 3 meses", cantidad: 2 },
+            { nombre: "Hembras de 3 a 8 meses", cantidad: 3 },
+            { nombre: "Bovinos de 8 a 12 meses", cantidad: 8 },
+            { nombre: "Hembras de 1 a 2 años", cantidad: 12 },
+            { nombre: "Hembras de 2 a 3 años", cantidad: 5 },
+            { nombre: "Hembras 5 años", cantidad: 9 },
+            { nombre: "Terneros menores a 1 año", cantidad: 7 },
+            { nombre: "Machos mayores de 3 años", cantidad: 23 },
+        ];
+
+        const valorUnitario = parseFloat(document.getElementById('valorUnitario').value);
+        let total = 0;
+        const tablaBody = document.getElementById('tablaSemovientes');
+        tablaBody.innerHTML = "";
+
+        categorias.forEach(cat => {
+            const valorEstimado = cat.cantidad * valorUnitario;
+            total += valorEstimado;
+
+            const row = document.createElement("tr");
+            row.innerHTML = `<td>${cat.nombre}</td><td>Bovinos vacunados</td><td>${cat.cantidad}</td><td>$${valorEstimado.toLocaleString('es-CO')}</td>`;
+            tablaBody.appendChild(row);
+        });
+
+        document.getElementById('totalSemovientes').innerText = `$${total.toLocaleString('es-CO')}`;
+        document.getElementById('resultadoSemovientes').innerText = `Valor estimado total: $${total.toLocaleString('es-CO')}`;
+        document.getElementById('detallesSemovientes').innerText = `Se evaluaron 8 categorías con un valor unitario de $${valorUnitario.toLocaleString('es-CO')}.`;
+    }
+</script>
 
 </body>
 
